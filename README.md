@@ -38,7 +38,7 @@ or
 
 ```bash
 
-nodemen app.ts
+nodemon app.ts
 
 ```
 
