@@ -5,9 +5,9 @@
   <div>
     <p>Current Active Sessions:</p>
     <ul>
-      <% sessions.forEach(function(session) { %>
+      <% sessions.forEach(function(session, index) { %>
         <li>Session ID: <%= session.sessionId %></li>
-        <li>User ID: <%= session.userId %></li>
+        <li>User ID: <%= index + 1 %></li>
         <form action="/auth/revoke-session" method="post">
           <input type="hidden" name="sessionId" value="<%= session.sessionId %>" />
           <button type="submit" class="btn btn-danger">Revoke Session</button>
