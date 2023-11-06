@@ -37,13 +37,13 @@ router.get("/dashboard", ensureAuthenticated, async (req, res) => {
         return res.status(500).send("An error occurred while retrieving sessions.");
       }
       
-      const sessionInfo = Object.keys(sessions).map((id) => {
-        return {
-          sessionId: id,
-          userId: sessions[id].passport?.user,
-        };
-      });
-
+      const sessionInfo = Object.keys(sessions)
+      .map((id) => ({
+        sessionId: id,
+        userId: sessions[id].passport?.user,
+        loginSequence: sessions[id].loginSequence,
+      }))
+      .sort((a, b) => a.loginSequence - b.loginSequence); 
       res.render("dashboard", {
         user: req.user,
         isAdmin: isAdmin,

@@ -54,8 +54,9 @@ router.post("/revoke-session", ensureAuthenticated, async (req, res) => {
       if (Object.keys(sessions).length > 0) {
         res.redirect("/dashboard");
       } else {
-        res.render("dashboard", {
-          user: req.user,
+        req.logout((err) => {
+          if (err) console.log(err);
+          res.redirect("/auth/login");
         });
       }
     });
